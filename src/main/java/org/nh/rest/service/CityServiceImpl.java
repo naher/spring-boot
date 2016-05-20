@@ -35,9 +35,12 @@ import org.springframework.util.StringUtils;
 @Transactional
 class CityServiceImpl implements CityService {
 
-    private final CityRepository cityRepository;
+    private CityRepository cityRepository;
 
-    private final HotelRepository hotelRepository;
+    private HotelRepository hotelRepository;
+
+    protected CityServiceImpl() {
+    }
 
     @Autowired
     public CityServiceImpl(CityRepository cityRepository, HotelRepository hotelRepository) {

@@ -23,30 +23,23 @@ import static org.junit.Assert.assertThat;
 import java.util.List;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.nh.rest.Application;
+import org.nh.rest.IntegrationTest;
 import org.nh.rest.model.City;
 import org.nh.rest.model.Hotel;
 import org.nh.rest.model.HotelSummary;
 import org.nh.rest.model.Rating;
 import org.nh.rest.model.RatingCount;
-import org.nh.rest.persistence.CityRepository;
-import org.nh.rest.persistence.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Integration tests for {@link HotelRepository}.
  *
  * @author Oliver Gierke
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
-public class HotelRepositoryIntegrationTests {
+public class HotelRepositoryIntegrationTests extends IntegrationTest {
 
     @Autowired
     CityRepository cityRepository;
