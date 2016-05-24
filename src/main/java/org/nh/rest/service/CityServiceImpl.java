@@ -23,6 +23,7 @@ import org.nh.rest.model.HotelSummary;
 import org.nh.rest.persistence.CityRepository;
 import org.nh.rest.persistence.CitySearchCriteria;
 import org.nh.rest.persistence.HotelRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -2,6 +2,7 @@ package org.nh.rest.controllers;
 
 import org.nh.rest.dto.City;
 import org.nh.rest.service.CityService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;

@@ -17,6 +17,7 @@
 package org.nh.rest;
 
 import static org.junit.Assert.assertEquals;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import java.lang.management.ManagementFactory;
@@ -26,6 +27,7 @@ import javax.management.ObjectName;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
@@ -88,10 +90,8 @@ public class SampleDataJpaApplicationTests {
 
     @Test
     public void testJmx() throws Exception {
-        assertEquals(
-                1,
-                ManagementFactory.getPlatformMBeanServer()
-                        .queryMBeans(new ObjectName("org.nh:type=ConnectionPool,*"), null).size());
+        assertEquals(1, ManagementFactory.getPlatformMBeanServer()
+                .queryMBeans(new ObjectName("org.nh:type=ConnectionPool,*"), null).size());
     }
 
 }

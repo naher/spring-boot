@@ -2,8 +2,10 @@ package org.nh.rest.controllers;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 import org.nh.rest.IntegrationTest;
 import org.nh.rest.dto.City;
+
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

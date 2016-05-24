@@ -19,6 +19,7 @@ package org.nh.rest.persistence;
 import java.util.List;
 
 import org.nh.rest.model.City;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;

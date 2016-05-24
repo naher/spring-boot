@@ -20,6 +20,7 @@ import org.nh.rest.model.City;
 import org.nh.rest.model.Hotel;
 import org.nh.rest.model.Review;
 import org.nh.rest.model.ReviewDetails;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

@@ -3,12 +3,15 @@ package org.nh.rest.service;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Test;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+
 import org.nh.rest.UnitTest;
 import org.nh.rest.persistence.CityRepository;
 import org.nh.rest.persistence.CitySearchCriteria;
 import org.nh.rest.persistence.HotelRepository;
+
 import org.springframework.data.domain.Pageable;
 
 public class CityServiceTest extends UnitTest {

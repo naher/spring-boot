@@ -18,17 +18,20 @@ package org.nh.rest.persistence;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+
 import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
 import org.junit.Test;
+
 import org.nh.rest.IntegrationTest;
 import org.nh.rest.model.City;
 import org.nh.rest.model.Hotel;
 import org.nh.rest.model.HotelSummary;
 import org.nh.rest.model.Rating;
 import org.nh.rest.model.RatingCount;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
