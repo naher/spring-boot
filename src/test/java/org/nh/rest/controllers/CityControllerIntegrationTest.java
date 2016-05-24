@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 public class CityControllerIntegrationTest extends IntegrationTest {
 
     @Test
-    public void testCustomContextPath() throws Exception {
+    public void testGetAllCities() throws Exception {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
