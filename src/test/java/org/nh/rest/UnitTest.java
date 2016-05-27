@@ -5,6 +5,8 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -17,6 +19,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public abstract class UnitTest {
+
+    protected final Logger logger = Logger.getLogger(UnitTest.class);
 
     public class MocksCollector {
         private final List<Object> createdMocks;

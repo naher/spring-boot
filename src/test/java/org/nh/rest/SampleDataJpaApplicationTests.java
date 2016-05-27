@@ -24,21 +24,12 @@ import java.lang.management.ManagementFactory;
 
 import javax.management.ObjectName;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.log4j.Logger;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.junit.Test;
+
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.Assert;
-import org.springframework.web.context.WebApplicationContext;
 
 /**
  * Integration test to run the application.
@@ -46,36 +37,9 @@ import org.springframework.web.context.WebApplicationContext;
  * @author Oliver Gierke
  * @author Dave Syer
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
-@WebAppConfiguration
-// Enable JMX so we can test the MBeans (you can't do this in a properties file)
-@TestPropertySource(properties = {"spring.jmx.enabled:true", "spring.datasource.jmx-enabled:true"})
-@ActiveProfiles("scratch")
-// Separate profile for web tests to avoid clashing databases
-public class SampleDataJpaApplicationTests {
+public class SampleDataJpaApplicationTests extends MockMvcIntegrationTest {
 
-    @Autowired
-    private WebApplicationContext context;
-
-    private MockMvc mvc;
-
-    @Before
-    public void setUp() {
-        mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
-    }
-
-    @Test
-    public void testGetAllCities() throws Exception {
-        String json = mvc
-                .perform(get("/city/all").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
-                .andReturn().getResponse().getContentAsString();;
-
-        System.out.println(json);
-
-        Assert.isTrue(json.contains("\"id\":1,\"name\":\"Brisbane\""));
-
-    }
+    protected final Logger logger = Logger.getLogger(SampleDataJpaApplicationTests.class);
 
     @Test
     public void testRepoGetAllCities() throws Exception {
@@ -83,15 +47,17 @@ public class SampleDataJpaApplicationTests {
                 .perform(get("/repo/cities").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse().getContentAsString();
 
-        System.out.println(json);
+        logger.info(json);
 
         Assert.isTrue(json.contains("\"totalElements\" : 21"));
     }
 
     @Test
     public void testJmx() throws Exception {
-        assertEquals(1, ManagementFactory.getPlatformMBeanServer()
-                .queryMBeans(new ObjectName("org.nh:type=ConnectionPool,*"), null).size());
+        assertEquals(
+                1,
+                ManagementFactory.getPlatformMBeanServer()
+                        .queryMBeans(new ObjectName("org.nh:type=ConnectionPool,*"), null).size());
     }
 
 }

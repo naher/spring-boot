@@ -3,6 +3,8 @@ package org.nh.rest.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Preconditions;
+
 public class City {
 
     private Long id;
@@ -26,10 +28,15 @@ public class City {
         map = city.getMap();
     }
 
+    public static City dto(org.nh.rest.model.City city) {
+        Preconditions.checkNotNull(city);
+        return new City(city);
+    }
+
     public static City[] dtos(List<org.nh.rest.model.City> cities) {
         List<City> result = new ArrayList<City>(cities.size());
         for (org.nh.rest.model.City city : cities) {
-            result.add(new City(city));
+            result.add(dto(city));
         }
         return result.toArray(new City[cities.size()]);
     }
