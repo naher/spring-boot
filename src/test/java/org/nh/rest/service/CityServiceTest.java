@@ -8,9 +8,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import org.nh.rest.UnitTest;
-import org.nh.rest.persistence.CityRepository;
-import org.nh.rest.persistence.CitySearchCriteria;
-import org.nh.rest.persistence.HotelRepository;
+import org.nh.rest.persistence.relational.CityRepository;
+import org.nh.rest.persistence.relational.CitySearchCriteria;
+import org.nh.rest.persistence.relational.HotelRepository;
 
 import org.springframework.data.domain.Pageable;
 

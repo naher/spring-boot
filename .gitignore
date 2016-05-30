@@ -13,6 +13,7 @@
 hs_err_pid*
 /.settings/
 /target/
+/data/
 /.classpath
 /.project
 /.gradle/

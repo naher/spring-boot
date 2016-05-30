@@ -23,7 +23,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.springframework.data.elasticsearch.annotations.Document;
+
 @Entity
+@Document(indexName = "city", type = "city", shards = 1, replicas = 0, refreshInterval = "-1")
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;

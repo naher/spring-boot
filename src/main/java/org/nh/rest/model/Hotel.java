@@ -29,7 +29,10 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.NaturalId;
 
+import org.springframework.data.elasticsearch.annotations.Document;
+
 @Entity
+@Document(indexName = "hotel", type = "hotel", shards = 1, replicas = 0, refreshInterval = "-1")
 public class Hotel implements Serializable {
 
     private static final long serialVersionUID = 1L;

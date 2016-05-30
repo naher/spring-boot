@@ -14,25 +14,26 @@
  * limitations under the License.
  */
 
-package org.nh.rest.service;
+package org.nh.rest.persistence.relational;
 
 import java.util.List;
 
 import org.nh.rest.model.City;
-import org.nh.rest.model.HotelSummary;
-import org.nh.rest.persistence.relational.CitySearchCriteria;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-public interface CityService {
+@RepositoryRestResource(exported = true, collectionResourceRel = "citys", path = "cities")
+public interface CityRepository extends PagingAndSortingRepository<City, Long> {
 
-    Page<City> findCities(CitySearchCriteria criteria, Pageable pageable);
+    List<City> findAll();
 
-    City getCity(String name, String country);
+    Page<City> findAll(Pageable pageable);
 
-    Page<HotelSummary> getHotels(City city, Pageable pageable);
+    Page<City> findByNameContainingAndCountryContainingAllIgnoringCase(String name, String country, Pageable pageable);
 
-    List<City> getAll();
+    City findByNameAndCountryAllIgnoringCase(String name, String country);
 
 }

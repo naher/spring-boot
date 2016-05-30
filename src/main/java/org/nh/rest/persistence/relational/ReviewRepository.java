@@ -14,25 +14,21 @@
  * limitations under the License.
  */
 
-package org.nh.rest.service;
+package org.nh.rest.persistence.relational;
 
-import java.util.List;
-
-import org.nh.rest.model.City;
-import org.nh.rest.model.HotelSummary;
-import org.nh.rest.persistence.relational.CitySearchCriteria;
+import org.nh.rest.model.Hotel;
+import org.nh.rest.model.Review;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.Repository;
 
-public interface CityService {
+public interface ReviewRepository extends Repository<Review, Long> {
 
-    Page<City> findCities(CitySearchCriteria criteria, Pageable pageable);
+    Page<Review> findByHotel(Hotel hotel, Pageable pageable);
 
-    City getCity(String name, String country);
+    Review findByHotelAndIndex(Hotel hotel, int index);
 
-    Page<HotelSummary> getHotels(City city, Pageable pageable);
-
-    List<City> getAll();
+    Review save(Review review);
 
 }

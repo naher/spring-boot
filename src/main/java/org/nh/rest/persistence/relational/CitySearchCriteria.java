@@ -14,25 +14,31 @@
  * limitations under the License.
  */
 
-package org.nh.rest.service;
+package org.nh.rest.persistence.relational;
 
-import java.util.List;
+import java.io.Serializable;
 
-import org.nh.rest.model.City;
-import org.nh.rest.model.HotelSummary;
-import org.nh.rest.persistence.relational.CitySearchCriteria;
+import org.springframework.util.Assert;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+public class CitySearchCriteria implements Serializable {
 
-public interface CityService {
+    private static final long serialVersionUID = 1L;
 
-    Page<City> findCities(CitySearchCriteria criteria, Pageable pageable);
+    private String name;
 
-    City getCity(String name, String country);
+    public CitySearchCriteria() {
+    }
 
-    Page<HotelSummary> getHotels(City city, Pageable pageable);
+    public CitySearchCriteria(String name) {
+        Assert.notNull(name, "Name must not be null");
+        this.name = name;
+    }
 
-    List<City> getAll();
+    public String getName() {
+        return this.name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 }
