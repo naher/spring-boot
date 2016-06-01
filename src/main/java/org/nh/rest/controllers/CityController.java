@@ -1,10 +1,10 @@
 package org.nh.rest.controllers;
 
+import org.apache.log4j.Logger;
 import org.nh.rest.dto.City;
 import org.nh.rest.dto.CitySearchCriteria;
 import org.nh.rest.exception.NotFoundException;
 import org.nh.rest.service.CityService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequestMapping("/city")
 public class CityController {
 
+    protected final Logger logger = Logger.getLogger(CityController.class);
+
     @Autowired
     private CityService cityService;
 
@@ -31,6 +33,7 @@ public class CityController {
 
     @RequestMapping(value = "/search", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody City getCities(@RequestBody final CitySearchCriteria criteria) throws NotFoundException {
+
         org.nh.rest.model.City city = cityService.getCity(criteria.getName(), criteria.getCountry());
         if (city == null) {
             throw new NotFoundException(
