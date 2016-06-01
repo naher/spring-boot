@@ -1,10 +1,12 @@
 package org.nh.rest.controllers;
 
 import org.apache.log4j.Logger;
+
 import org.nh.rest.dto.City;
 import org.nh.rest.dto.CitySearchCriteria;
 import org.nh.rest.exception.NotFoundException;
 import org.nh.rest.service.CityService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
