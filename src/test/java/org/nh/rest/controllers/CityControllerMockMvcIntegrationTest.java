@@ -38,9 +38,10 @@ public class CityControllerMockMvcIntegrationTest extends MockMvcIntegrationTest
     public void testGetCityByNameAndCountry() throws UnsupportedEncodingException, Exception {
 
         String json = mvc
-                .perform(get("/city/search/n/Brisbane/c/Australia").accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();;
+                .perform(
+                        get("/city/search/n/Brisbane/c/Australia").accept(MediaType.APPLICATION_JSON).contentType(
+                                MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andReturn().getResponse()
+                .getContentAsString();;
 
         logger.info(json);
 
@@ -53,9 +54,10 @@ public class CityControllerMockMvcIntegrationTest extends MockMvcIntegrationTest
     public void testGetCityByNameAndCountryNotFound() throws UnsupportedEncodingException, Exception {
 
         String json = mvc
-                .perform(get("/city/search/n/thename/c/thecountry").accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound()).andReturn().getResponse().getContentAsString();;
+                .perform(
+                        get("/city/search/n/thename/c/thecountry").accept(MediaType.APPLICATION_JSON).contentType(
+                                MediaType.APPLICATION_JSON)).andExpect(status().isNotFound()).andReturn().getResponse()
+                .getContentAsString();;
 
         logger.info(json);
 
@@ -68,9 +70,10 @@ public class CityControllerMockMvcIntegrationTest extends MockMvcIntegrationTest
         CitySearchCriteria criteria = new CitySearchCriteria("Brisbane", "Australia");
 
         String json = mvc
-                .perform(post("/city/search").content(asJsonString(criteria)).accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+                .perform(
+                        post("/city/search").content(asJsonString(criteria)).accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andReturn()
+                .getResponse().getContentAsString();
 
         logger.info(json);
 
@@ -80,15 +83,16 @@ public class CityControllerMockMvcIntegrationTest extends MockMvcIntegrationTest
     }
 
     @Test
-    public void testGetCityByNameAndCountryNotFoundPost()
-            throws UnsupportedEncodingException, JsonProcessingException, Exception {
+    public void testGetCityByNameAndCountryNotFoundPost() throws UnsupportedEncodingException, JsonProcessingException,
+            Exception {
 
         CitySearchCriteria criteria = new CitySearchCriteria("thename", "thecountry");
 
         String json = mvc
-                .perform(post("/city/search").content(asJsonString(criteria)).accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound()).andReturn().getResponse().getContentAsString();
+                .perform(
+                        post("/city/search").content(asJsonString(criteria)).accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound()).andReturn()
+                .getResponse().getContentAsString();
 
         logger.info(json);
 

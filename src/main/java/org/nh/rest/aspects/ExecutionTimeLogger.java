@@ -1,12 +1,12 @@
 package org.nh.rest.aspects;
 
 import org.apache.log4j.Logger;
-
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
@@ -22,6 +22,16 @@ public class ExecutionTimeLogger {
 
     @Pointcut("execution(* org.nh.rest.controllers.*Controller.*(..))")
     public void methodPointcut() {
+    }
+
+    @Before("requestMapping() && methodPointcut()")
+    public void before() {
+        logger.info("BEFORE");
+    }
+
+    @After("requestMapping() && methodPointcut()")
+    public void after() {
+        logger.info("AFTER");
     }
 
     @Around("requestMapping() && methodPointcut()")

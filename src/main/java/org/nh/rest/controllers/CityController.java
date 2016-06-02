@@ -1,12 +1,10 @@
 package org.nh.rest.controllers;
 
 import org.apache.log4j.Logger;
-
 import org.nh.rest.dto.City;
 import org.nh.rest.dto.CitySearchCriteria;
 import org.nh.rest.exception.NotFoundException;
 import org.nh.rest.service.CityService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -38,8 +36,8 @@ public class CityController {
 
         org.nh.rest.model.City city = cityService.getCity(criteria.getName(), criteria.getCountry());
         if (city == null) {
-            throw new NotFoundException(
-                    "city not found for parameters n: " + criteria.getName() + ", c: " + criteria.getCountry());
+            throw new NotFoundException("city not found for parameters n: " + criteria.getName() + ", c: "
+                    + criteria.getCountry());
         }
         return City.dto(city);
     }
@@ -57,6 +55,12 @@ public class CityController {
     @ExceptionHandler({NotFoundException.class})
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public @ResponseBody String notFound(NotFoundException e) {
+        return e.getMessage();
+    }
+
+    @ExceptionHandler({RuntimeException.class})
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public @ResponseBody String runtime(RuntimeException e) {
         return e.getMessage();
     }
 

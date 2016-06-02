@@ -31,8 +31,8 @@ public class AppConfiguration {
             }
 
             @Override
-            public void doFilter(ServletRequest req, ServletResponse res, FilterChain fc)
-                    throws IOException, ServletException {
+            public void doFilter(ServletRequest req, ServletResponse res, FilterChain fc) throws IOException,
+                    ServletException {
                 log.info(">> -- Filtering " + ((HttpServletRequest) req).getRequestURI());
                 fc.doFilter(req, res);
                 log.info("<< -- Filtering " + ((HttpServletRequest) req).getRequestURI());

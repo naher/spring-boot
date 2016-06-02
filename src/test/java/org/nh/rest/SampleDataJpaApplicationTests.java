@@ -90,8 +90,10 @@ public class SampleDataJpaApplicationTests extends MockMvcIntegrationTest {
 
     @Test
     public void testJmx() throws Exception {
-        assertEquals(1, ManagementFactory.getPlatformMBeanServer()
-                .queryMBeans(new ObjectName("org.nh:type=ConnectionPool,*"), null).size());
+        assertEquals(
+                1,
+                ManagementFactory.getPlatformMBeanServer()
+                        .queryMBeans(new ObjectName("org.nh:type=ConnectionPool,*"), null).size());
     }
 
 }
