@@ -8,10 +8,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import org.nh.rest.UnitTest;
-import org.nh.rest.persistence.relational.CityRepository;
-import org.nh.rest.persistence.relational.CitySearchCriteria;
-import org.nh.rest.persistence.relational.HotelRepository;
-
+import org.nh.rest.persistence.relational.ds.CityRepository;
+import org.nh.rest.persistence.relational.ds.CitySearchCriteria;
+import org.nh.rest.persistence.relational.ds.HotelRepository;
 import org.springframework.data.domain.Pageable;
 
 public class CityServiceTest extends UnitTest {

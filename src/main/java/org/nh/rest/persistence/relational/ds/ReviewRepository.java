@@ -14,31 +14,21 @@
  * limitations under the License.
  */
 
-package org.nh.rest.persistence.relational;
+package org.nh.rest.persistence.relational.ds;
 
-import java.io.Serializable;
+import org.nh.rest.model.Hotel;
+import org.nh.rest.model.Review;
 
-import org.springframework.util.Assert;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.Repository;
 
-public class CitySearchCriteria implements Serializable {
+public interface ReviewRepository extends Repository<Review, Long> {
 
-    private static final long serialVersionUID = 1L;
+    Page<Review> findByHotel(Hotel hotel, Pageable pageable);
 
-    private String name;
+    Review findByHotelAndIndex(Hotel hotel, int index);
 
-    public CitySearchCriteria() {
-    }
+    Review save(Review review);
 
-    public CitySearchCriteria(String name) {
-        Assert.notNull(name, "Name must not be null");
-        this.name = name;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

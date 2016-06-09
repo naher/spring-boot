@@ -26,9 +26,8 @@ import org.nh.rest.model.Rating;
 import org.nh.rest.model.RatingCount;
 import org.nh.rest.model.Review;
 import org.nh.rest.model.ReviewDetails;
-import org.nh.rest.persistence.relational.HotelRepository;
-import org.nh.rest.persistence.relational.ReviewRepository;
-
+import org.nh.rest.persistence.relational.ds.HotelRepository;
+import org.nh.rest.persistence.relational.ds.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

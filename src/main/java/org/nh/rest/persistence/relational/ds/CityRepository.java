@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.nh.rest.persistence.relational;
+package org.nh.rest.persistence.relational.ds;
 
 import java.util.List;
 

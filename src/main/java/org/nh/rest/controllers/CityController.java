@@ -36,8 +36,8 @@ public class CityController {
 
         org.nh.rest.model.City city = cityService.getCity(criteria.getName(), criteria.getCountry());
         if (city == null) {
-            throw new NotFoundException("city not found for parameters n: " + criteria.getName() + ", c: "
-                    + criteria.getCountry());
+            throw new NotFoundException(
+                    "city not found for parameters n: " + criteria.getName() + ", c: " + criteria.getCountry());
         }
         return City.dto(city);
     }
@@ -55,12 +55,14 @@ public class CityController {
     @ExceptionHandler({NotFoundException.class})
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public @ResponseBody String notFound(NotFoundException e) {
+        logger.info(e.getMessage());
         return e.getMessage();
     }
 
     @ExceptionHandler({RuntimeException.class})
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public @ResponseBody String runtime(RuntimeException e) {
+        logger.error("INTERNAL_SERVER_ERROR", e);
         return e.getMessage();
     }
 

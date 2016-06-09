@@ -50,11 +50,11 @@ public class Review implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private Rating rating;
 
-    @Column(nullable = false)
+    @Column(name = "check_in_date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date checkInDate;
 
-    @Column(nullable = false)
+    @Column(name = "trip_type", nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private TripType tripType;
 

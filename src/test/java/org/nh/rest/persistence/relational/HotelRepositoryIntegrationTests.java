@@ -31,9 +31,8 @@ import org.nh.rest.model.Hotel;
 import org.nh.rest.model.HotelSummary;
 import org.nh.rest.model.Rating;
 import org.nh.rest.model.RatingCount;
-import org.nh.rest.persistence.relational.CityRepository;
-import org.nh.rest.persistence.relational.HotelRepository;
-
+import org.nh.rest.persistence.relational.ds.CityRepository;
+import org.nh.rest.persistence.relational.ds.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

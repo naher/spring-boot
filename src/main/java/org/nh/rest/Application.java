@@ -7,9 +7,9 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = {"org.nh.rest.controllers", "org.nh.rest.aspects", "org.nh.rest.service"})
-@EnableJpaRepositories({"org.nh.rest.persistence.relational"})
+@EnableJpaRepositories({"org.nh.rest.persistence.relational.ds"})
 @EnableElasticsearchRepositories({"org.nh.rest.persistence.elasticsearch"})
-@Import(AppConfiguration.class)
+@Import({AppConfiguration.class, DS01Config.class, DS02Config.class})
 public class Application {
 
     public static void main(String[] args) {
