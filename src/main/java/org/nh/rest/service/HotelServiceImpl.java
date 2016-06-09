@@ -36,7 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 @Component("hotelService")
-@Transactional
+@Transactional(transactionManager = "transactionManager")
 class HotelServiceImpl implements HotelService {
 
     private final HotelRepository hotelRepository;

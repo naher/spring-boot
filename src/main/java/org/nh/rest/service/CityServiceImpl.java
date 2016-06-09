@@ -32,7 +32,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 @Component("cityService")
-@Transactional
+@Transactional(transactionManager = "transactionManager")
 class CityServiceImpl implements CityService {
 
     private CityRepository cityRepository;
