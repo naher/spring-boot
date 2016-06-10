@@ -1,26 +1,47 @@
 package org.nh.rest.model.ds01;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(schema = "user")
+@Table
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
+    @Column
     private String name;
 
     @Column(unique = true, nullable = false)
     private String email;
 
+    @Column
     private int age;
+
+    @ElementCollection
+    @CollectionTable(name = "products_of_interest", joinColumns = @JoinColumn(name = "product_id"))
+    @Column(name = "customer_id")
+    List<Long> productsOfInterest = new ArrayList<Long>();
+
+    protected User() {
+    }
+
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 
     public String getName() {
         return name;
@@ -46,8 +67,12 @@ public class User {
         this.age = age;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
+    }
+
+    public List<Long> getProductsOfInterest() {
+        return productsOfInterest;
     }
 
     @Override

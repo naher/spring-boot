@@ -13,7 +13,11 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "org.nh.rest.model.ds01", entityManagerFactoryRef = "ds01EntityManager", transactionManagerRef = "ds01TransactionManager")
+@EnableJpaRepositories(basePackages = "org.nh.rest.persistence.relational.ds01", /*
+ * entityManagerFactoryRef
+ * =
+ * "ds01EntityManager",
+ */transactionManagerRef = "ds01TransactionManager")
 public class DS01Config {
 
     @Bean

@@ -36,8 +36,8 @@ public class CityController {
 
         org.nh.rest.model.City city = cityService.getCity(criteria.getName(), criteria.getCountry());
         if (city == null) {
-            throw new NotFoundException(
-                    "city not found for parameters n: " + criteria.getName() + ", c: " + criteria.getCountry());
+            throw new NotFoundException("city not found for parameters n: " + criteria.getName() + ", c: "
+                    + criteria.getCountry());
         }
         return City.dto(city);
     }
