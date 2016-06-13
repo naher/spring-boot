@@ -21,10 +21,13 @@ import java.util.List;
 import org.nh.rest.model.City;
 import org.nh.rest.model.HotelSummary;
 import org.nh.rest.persistence.relational.ds.CitySearchCriteria;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface CityService {
+
+    City create(String name, String state, String country, String map);
 
     Page<City> findCities(CitySearchCriteria criteria, Pageable pageable);
 

@@ -2,6 +2,7 @@ package org.nh.rest.service;
 
 import org.nh.rest.model.ds02.Product;
 import org.nh.rest.persistence.relational.ds02.ProductRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

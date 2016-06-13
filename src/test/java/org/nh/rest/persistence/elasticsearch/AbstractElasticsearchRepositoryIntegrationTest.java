@@ -3,6 +3,7 @@ package org.nh.rest.persistence.elasticsearch;
 import org.nh.rest.IntegrationTest;
 import org.nh.rest.persistence.relational.ds.CityRepository;
 import org.nh.rest.persistence.relational.ds.HotelRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractElasticsearchRepositoryIntegrationTest extends IntegrationTest {

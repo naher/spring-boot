@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.nh.rest.IntegrationTest;
 import org.nh.rest.model.City;
 import org.nh.rest.persistence.relational.ds.CityRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

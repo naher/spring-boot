@@ -4,6 +4,7 @@ import org.nh.rest.model.ds01.User;
 import org.nh.rest.model.ds02.Product;
 import org.nh.rest.persistence.relational.ds01.UserRepository;
 import org.nh.rest.persistence.relational.ds02.ProductRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

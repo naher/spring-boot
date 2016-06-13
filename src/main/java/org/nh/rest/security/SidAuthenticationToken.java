@@ -4,9 +4,9 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 
 public class SidAuthenticationToken extends AbstractAuthenticationToken {
 
-	private static final long serialVersionUID = -4214570157938964709L;
-	
-	private String sid;
+    private static final long serialVersionUID = -4214570157938964709L;
+
+    private String sid;
 
     public SidAuthenticationToken(String sid) {
         super(null);
@@ -24,8 +24,8 @@ public class SidAuthenticationToken extends AbstractAuthenticationToken {
         return null;
     }
 
-	public String getSid() {
-		return sid;
-	}
+    public String getSid() {
+        return sid;
+    }
 
 }

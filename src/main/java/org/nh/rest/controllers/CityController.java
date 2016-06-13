@@ -1,30 +1,34 @@
 package org.nh.rest.controllers;
 
 import org.apache.log4j.Logger;
+
 import org.nh.rest.dto.City;
 import org.nh.rest.dto.CitySearchCriteria;
 import org.nh.rest.exception.NotFoundException;
 import org.nh.rest.service.CityService;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 @RequestMapping("/city")
-public class CityController {
+public class CityController extends AbstractController {
 
     protected final Logger logger = Logger.getLogger(CityController.class);
 
     @Autowired
     private CityService cityService;
+
+    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody City create(@RequestBody final City city) {
+        return City.dto(cityService.create(city.getName(), city.getState(), city.getCountry(), city.getMap()));
+    }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody City[] getAllCities() {
@@ -50,20 +54,6 @@ public class CityController {
             throw new NotFoundException("city not found for parameters n: " + name + ", c: " + country);
         }
         return City.dto(city);
-    }
-
-    @ExceptionHandler({NotFoundException.class})
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public @ResponseBody String notFound(NotFoundException e) {
-        logger.info(e.getMessage());
-        return e.getMessage();
-    }
-
-    @ExceptionHandler({RuntimeException.class})
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public @ResponseBody String runtime(RuntimeException e) {
-        logger.error("INTERNAL_SERVER_ERROR", e);
-        return e.getMessage();
     }
 
 }

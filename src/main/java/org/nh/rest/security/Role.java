@@ -15,24 +15,24 @@ public enum Role {
         this.description = description;
         this.grantedAuthority = new GrantedAuthority(this);
     }
-        
+
     public String getDescription() {
         return description;
     }
 
     public GrantedAuthority getGrantedAuthority() {
         return grantedAuthority;
-    }        
-    
+    }
+
     public static class GrantedAuthority implements org.springframework.security.core.GrantedAuthority {
-    	
-		private static final long serialVersionUID = 1515995351841158080L;
-		protected Role role;
-        
-        public GrantedAuthority(Role role) 
-        { this.role = role; 
+
+        private static final long serialVersionUID = 1515995351841158080L;
+        protected Role role;
+
+        public GrantedAuthority(Role role) {
+            this.role = role;
         }
-        
+
         @Override
         public String getAuthority() {
             return role.name();

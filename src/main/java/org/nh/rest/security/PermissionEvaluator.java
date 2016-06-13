@@ -3,31 +3,33 @@ package org.nh.rest.security;
 import java.io.Serializable;
 
 import org.apache.log4j.Logger;
+
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PermissionEvaluator implements org.springframework.security.access.PermissionEvaluator {
 
-	protected final Logger logger = Logger.getLogger(PermissionEvaluator.class);
-			
-	@Override
+    protected final Logger logger = Logger.getLogger(PermissionEvaluator.class);
+
+    @Override
     public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
 
-		// verifying authentication
+        // verifying authentication
         if (authentication == null) {
-        	logger.info("Null Authentication object received.");
+            logger.info("Null Authentication object received.");
             return false;
         }
         if (authentication instanceof AnonymousAuthenticationToken) {
-        	logger.info("Access denied to Anonymous user.");
+            logger.info("Access denied to Anonymous user.");
             return false;
         }
         if (targetDomainObject == null) {
-        	logger.warn("Null targetDomainObject object, allowing access.");
+            logger.warn("Null targetDomainObject object, allowing access.");
             return true;
         }
 
-        
         // verifying role
         Role role = null;
         if (permission == null) {
@@ -49,9 +51,9 @@ public class PermissionEvaluator implements org.springframework.security.access.
         }
 
         // getting user and verifying user permissions
-//      String email = (String) authentication.getPrincipal();
-//      User user = userRepository.findByEmail(email);
-        
+        // String email = (String) authentication.getPrincipal();
+        // User user = userRepository.findByEmail(email);
+
         throw new IllegalArgumentException(String.format("Invalid targetDomainObject object: %s", targetDomainObject));
     }
 

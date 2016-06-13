@@ -3,7 +3,9 @@ package org.nh.rest;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;

@@ -56,6 +56,12 @@ public class City implements Serializable {
         this.country = country;
     }
 
+    public City(String name, String state, String country, String map) {
+        this(name, country);
+        this.state = state;
+        this.map = map;
+    }
+
     public Long getId() {
         return id;
     }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 import org.nh.rest.model.City;
 
 public class CityElasticsearchRepositoryIntegrationTest extends AbstractElasticsearchRepositoryIntegrationTest {

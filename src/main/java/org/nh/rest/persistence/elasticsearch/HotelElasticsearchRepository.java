@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.nh.rest.model.City;
 import org.nh.rest.model.Hotel;
+
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 public interface HotelElasticsearchRepository extends ElasticsearchRepository<Hotel, Long> {

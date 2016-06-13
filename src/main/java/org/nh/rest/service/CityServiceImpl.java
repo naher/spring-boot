@@ -26,6 +26,7 @@ import org.nh.rest.persistence.relational.ds.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -86,6 +87,13 @@ class CityServiceImpl implements CityService {
     public Page<HotelSummary> getHotels(City city, Pageable pageable) {
         Assert.notNull(city, "City must not be null");
         return hotelRepository.findByCity(city, pageable);
+    }
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public City create(String name, String state, String country, String map) {
+        City city = new City(name, state, country, map);
+        return cityRepository.save(city);
     }
 
 }

@@ -2,8 +2,10 @@ package org.nh.rest.service;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 import org.nh.rest.IntegrationTest;
 import org.nh.rest.model.ds02.Product;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ProductServiceIntegrationTest extends IntegrationTest {

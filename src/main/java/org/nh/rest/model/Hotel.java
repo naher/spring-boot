@@ -28,6 +28,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.NaturalId;
+
 import org.springframework.data.elasticsearch.annotations.Document;
 
 @Entity

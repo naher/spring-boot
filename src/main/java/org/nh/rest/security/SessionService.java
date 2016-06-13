@@ -2,15 +2,15 @@ package org.nh.rest.security;
 
 public interface SessionService {
 
-	SessionToken authenticate(String email, String password);
+    SessionToken authenticate(String email, String password);
 
-	SessionToken createSession(String sltk);
+    SessionToken createSession(String sltk);
 
-	SessionToken createSessionWithHash(String email, String passhash);
+    SessionToken createSessionWithHash(String email, String passhash);
 
-	boolean contains(String sid);
+    boolean contains(String sid);
 
-	SessionToken retrieve(String sid);
+    SessionToken retrieve(String sid);
 
-	void remove(String sid);
+    void remove(String sid);
 }

@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
+import org.nh.rest.Application;
+import org.nh.rest.Constants;
 import org.nh.rest.IntegrationTest;
 import org.nh.rest.dto.City;
 import org.nh.rest.dto.CitySearchCriteria;
@@ -98,4 +100,66 @@ public class CityControllerIntegrationTest extends IntegrationTest {
         logger.info(msg);
     }
 
+    @Test
+    public void testCreateCityAccessDenied() {
+        HttpHeaders headers = getHeaders();
+
+        String name = "name";
+        String country = "country";
+        String state = "state";
+        String map = "-37.813187, 144.96298";
+
+        City request = new City(name, state, country, map);
+        ResponseEntity<String> entity = new TestRestTemplate().exchange(getURL("/city"), HttpMethod.POST,
+                new HttpEntity<City>(request, headers), String.class);
+
+        logger.info(entity.getBody());
+        Assert.assertEquals(HttpStatus.UNAUTHORIZED, entity.getStatusCode());
+    }
+
+    @Test
+    public void testCreateCityAuthenticationFailed() {
+        HttpHeaders headers = getHeaders();
+
+        headers.add(Application.X_AUTH_EMAIL, Constants.ADMIN_MAIL_COM);
+        headers.add(Application.X_AUTH_PASS, Constants.USERPASS);
+
+        String name = "name";
+        String country = "country";
+        String state = "state";
+        String map = "-37.813187, 144.96298";
+
+        City request = new City(name, state, country, map);
+        ResponseEntity<String> entity = new TestRestTemplate().exchange(getURL("/city"), HttpMethod.POST,
+                new HttpEntity<City>(request, headers), String.class);
+
+        logger.info(entity.getBody());
+        Assert.assertEquals(HttpStatus.UNAUTHORIZED, entity.getStatusCode());
+    }
+
+    @Test
+    public void testCreateCity() {
+        HttpHeaders headers = getHeaders();
+
+        headers.add(Application.X_AUTH_EMAIL, Constants.ADMIN_MAIL_COM);
+        headers.add(Application.X_AUTH_PASS, Constants.ADMINPASS);
+
+        String name = "name";
+        String country = "country";
+        String state = "state";
+        String map = "-37.813187, 144.96298";
+
+        City request = new City(name, state, country, map);
+        ResponseEntity<City> entity = new TestRestTemplate().exchange(getURL("/city"), HttpMethod.POST,
+                new HttpEntity<City>(request, headers), City.class);
+
+        Assert.assertEquals(HttpStatus.OK, entity.getStatusCode());
+        City city = entity.getBody();
+
+        logger.info(entity.getBody());
+
+        Assert.assertNotNull(city);
+        Assert.assertNotNull(city.getId());
+        Assert.assertEquals(request.getName(), city.getName());
+    }
 }

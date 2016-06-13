@@ -28,6 +28,13 @@ public class City {
         map = city.getMap();
     }
 
+    public City(String name, String state, String country, String map) {
+        this.name = name;
+        this.state = state;
+        this.country = country;
+        this.map = map;
+    }
+
     public static City dto(org.nh.rest.model.City city) {
         Preconditions.checkNotNull(city);
         return new City(city);

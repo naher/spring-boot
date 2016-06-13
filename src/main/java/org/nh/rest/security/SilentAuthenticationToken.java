@@ -4,9 +4,9 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 
 public class SilentAuthenticationToken extends AbstractAuthenticationToken {
 
-	private static final long serialVersionUID = -3637724108844945125L;
-	
-	private String sltk;
+    private static final long serialVersionUID = -3637724108844945125L;
+
+    private String sltk;
 
     public SilentAuthenticationToken(String sltk) {
         super(null);
@@ -24,8 +24,8 @@ public class SilentAuthenticationToken extends AbstractAuthenticationToken {
         return null;
     }
 
-	public String getSltk() {
-		return sltk;
-	}
-        
+    public String getSltk() {
+        return sltk;
+    }
+
 }

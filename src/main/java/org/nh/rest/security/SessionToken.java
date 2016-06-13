@@ -10,32 +10,30 @@ public class SessionToken {
 
     private Authentication authentication;
 
-    public SessionToken(String sid, String email,
-			AuthenticatedAuthenticationToken authentication) {
-		this.sid = sid;
-		this.email = email;
-		this.authentication = authentication;
-	}
+    public SessionToken(String sid, String email, AuthenticatedAuthenticationToken authentication) {
+        this.sid = sid;
+        this.email = email;
+        this.authentication = authentication;
+    }
 
-	public String getSid() {
-		return sid;
-	}
+    public String getSid() {
+        return sid;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public Authentication getAuthentication() {
-		return authentication;
-	}
+    public Authentication getAuthentication() {
+        return authentication;
+    }
 
-	@Override
-	public String toString() {
-		return "SessionToken [sid=" + sid + ", email=" + email
-				+ ", authentication=" + authentication + "]";
-	}
+    @Override
+    public String toString() {
+        return "SessionToken [sid=" + sid + ", email=" + email + ", authentication=" + authentication + "]";
+    }
 
-	@Override
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
