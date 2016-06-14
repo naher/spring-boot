@@ -5,12 +5,10 @@ import java.util.Collection;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import org.nh.rest.IntegrationTest;
 import org.nh.rest.model.City;
-import org.nh.rest.security.Role.GrantedAuthority;
 import org.nh.rest.security.Role;
-
+import org.nh.rest.security.Role.GrantedAuthority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;

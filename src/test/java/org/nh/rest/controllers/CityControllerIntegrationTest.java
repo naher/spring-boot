@@ -1,16 +1,13 @@
 package org.nh.rest.controllers;
 
 import org.apache.log4j.Logger;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import org.nh.rest.Application;
 import org.nh.rest.Constants;
 import org.nh.rest.IntegrationTest;
 import org.nh.rest.dto.City;
 import org.nh.rest.dto.CitySearchCriteria;
-
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -144,7 +141,7 @@ public class CityControllerIntegrationTest extends IntegrationTest {
         headers.add(Application.X_AUTH_EMAIL, Constants.ADMIN_MAIL_COM);
         headers.add(Application.X_AUTH_PASS, Constants.ADMINPASS);
 
-        String name = "name";
+        String name = "testCreateCity";
         String country = "country";
         String state = "state";
         String map = "-37.813187, 144.96298";
