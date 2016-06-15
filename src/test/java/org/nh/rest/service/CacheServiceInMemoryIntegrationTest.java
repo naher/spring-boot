@@ -2,7 +2,9 @@ package org.nh.rest.service;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 import org.nh.rest.IntegrationTest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CacheServiceInMemoryIntegrationTest extends IntegrationTest {

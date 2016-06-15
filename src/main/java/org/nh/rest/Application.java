@@ -19,6 +19,7 @@ public class Application {
     public static final String X_AUTH_SID = "X-Auth-Sid";
 
     public static void main(String[] args) {
+
         SpringApplication.run(Application.class, args);
     }
 
