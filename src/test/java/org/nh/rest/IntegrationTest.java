@@ -3,9 +3,7 @@ package org.nh.rest;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
-
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
@@ -18,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebIntegrationTest("server.port=8889")
 // Separate profile for web tests to avoid clashing databases
-@ActiveProfiles("scratch")
+@ActiveProfiles({"scratch", "test"})
 @Transactional
 public abstract class IntegrationTest {
 
