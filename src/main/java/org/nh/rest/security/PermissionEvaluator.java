@@ -3,7 +3,7 @@ package org.nh.rest.security;
 import java.io.Serializable;
 
 import org.apache.log4j.Logger;
-
+import org.nh.rest.model.City;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -35,24 +35,38 @@ public class PermissionEvaluator implements org.springframework.security.access.
         if (permission == null) {
             throw new IllegalArgumentException(String.format("Invalid null permission object"));
         } else {
-            if (permission instanceof String) {
-                role = Role.valueOf((String) permission);
-            } else if (permission instanceof Role) {
-                role = (Role) permission;
-            } else {
-                throw new IllegalArgumentException(String.format("Invalid permission object: %s", permission));
+            try {
+                if (permission instanceof String) {
+                    role = Role.valueOf((String) permission);
+                } else if (permission instanceof Role) {
+                    role = (Role) permission;
+                } else {
+                    throw new IllegalArgumentException(String.format("Invalid permission object: %s", permission));
+                }
+
+                // verifying authorities
+                if (!role.equals(Role.ROLE_ANONYMOUS)
+                        && !authentication.getAuthorities().contains(role.getGrantedAuthority())) {
+                    logger.info("Role not found on authentication: " + role + ", " + authentication);
+                    return false;
+                }
+            } catch (IllegalArgumentException iae) {
+                logger.info("not role based permission: " + iae.getMessage());
             }
         }
 
-        // verifying authorities
-        if (!role.equals(Role.ROLE_ANONYMOUS) && !authentication.getAuthorities().contains(role.getGrantedAuthority())) {
-            logger.info("Role not found on authentication: " + role + ", " + authentication);
-            return false;
-        }
-
-        // getting user and verifying user permissions
+        // getting user and verifying user permissions over the target domain
+        // object
         // String email = (String) authentication.getPrincipal();
         // User user = userRepository.findByEmail(email);
+
+        if (targetDomainObject instanceof City) {
+            City city = (City) targetDomainObject;
+            if (city.getName().equals("Tandil"))
+                return true;
+            else
+                return false;
+        }
 
         throw new IllegalArgumentException(String.format("Invalid targetDomainObject object: %s", targetDomainObject));
     }

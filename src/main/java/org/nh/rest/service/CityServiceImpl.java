@@ -23,7 +23,6 @@ import org.nh.rest.model.HotelSummary;
 import org.nh.rest.persistence.relational.ds.CityRepository;
 import org.nh.rest.persistence.relational.ds.CitySearchCriteria;
 import org.nh.rest.persistence.relational.ds.HotelRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -95,6 +94,12 @@ class CityServiceImpl implements CityService {
     public City create(String name, String state, String country, String map) {
         City city = new City(name, state, country, map);
         return cityRepository.save(city);
+    }
+
+    @Override
+    @PreAuthorize("hasPermission(#city, 'delete')")
+    public void delete(City city) {
+        cityRepository.delete(city);
     }
 
 }
