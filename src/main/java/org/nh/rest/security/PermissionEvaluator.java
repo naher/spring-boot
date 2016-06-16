@@ -60,6 +60,8 @@ public class PermissionEvaluator implements org.springframework.security.access.
         // String email = (String) authentication.getPrincipal();
         // User user = userRepository.findByEmail(email);
 
+        // TODO note this is just a hardcoded example, in a real productive
+        // implementation this must me designed and implemented properly
         if (targetDomainObject instanceof City) {
             City city = (City) targetDomainObject;
             if (city.getName().equals("Tandil"))
