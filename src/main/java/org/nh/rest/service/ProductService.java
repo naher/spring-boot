@@ -6,5 +6,7 @@ public interface ProductService {
 
     Product create(String name, double price);
 
+    Product save(Product product);
+
     Product get(String name);
 }
