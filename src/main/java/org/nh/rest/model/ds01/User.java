@@ -32,7 +32,7 @@ public class User {
     private int age;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "products_of_interest", joinColumns = @JoinColumn(name = "product_id") )
+    @CollectionTable(name = "products_of_interest", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "customer_id")
     List<Long> productsOfInterest = new ArrayList<Long>();
 

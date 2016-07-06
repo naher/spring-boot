@@ -13,13 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
-@WebIntegrationTest("server.port=8890")
+@WebIntegrationTest("server.port=8889")
 // Separate profile for web tests to avoid clashing databases
-@ActiveProfiles({"scratch", "test", "nonjta"})
+@ActiveProfiles({"scratch", "test", "jta"})
 @Transactional
-public abstract class IntegrationTest implements IntegrationAbstractTest {
+public abstract class JtaIntegrationTest implements IntegrationAbstractTest {
 
-    protected final Logger logger = Logger.getLogger(IntegrationTest.class);
+    protected final Logger logger = Logger.getLogger(JtaIntegrationTest.class);
 
     @Value("${server.port}")
     private int port;
@@ -28,5 +28,4 @@ public abstract class IntegrationTest implements IntegrationAbstractTest {
     public Integer getPort() {
         return port;
     }
-
 }

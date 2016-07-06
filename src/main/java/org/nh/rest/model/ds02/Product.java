@@ -29,7 +29,7 @@ public class Product {
     private double price;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "interested_customers", joinColumns = @JoinColumn(name = "customer_id") )
+    @CollectionTable(name = "interested_customers", joinColumns = @JoinColumn(name = "customer_id"))
     @Column(name = "product_id")
     List<Long> interestedCustomers = new ArrayList<Long>();
 

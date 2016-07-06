@@ -1,14 +1,16 @@
 package org.nh.rest.service;
 
+import java.util.List;
+
 import org.nh.rest.model.ds02.Product;
 import org.nh.rest.persistence.relational.ds02.ProductRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-// @Transactional(transactionManager = "ds01TransactionManager")
-@Transactional("chainedTransactionManager")
+@Transactional(transactionManager = "ds01TransactionManager")
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
@@ -28,6 +30,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product get(String name) {
         return repository.findByName(name);
+    }
+
+    @Override
+    public List<Product> findAll(List<Long> ids) {
+        return repository.findAll(ids);
     }
 
 }

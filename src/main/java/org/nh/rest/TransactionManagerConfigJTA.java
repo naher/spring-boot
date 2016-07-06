@@ -7,6 +7,10 @@ import javax.sql.DataSource;
 import javax.transaction.TransactionManager;
 import javax.transaction.UserTransaction;
 
+import com.atomikos.icatch.config.UserTransactionService;
+import com.atomikos.icatch.config.UserTransactionServiceImp;
+import com.atomikos.icatch.jta.UserTransactionManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationHome;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -24,18 +28,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.jta.JtaTransactionManager;
 import org.springframework.util.StringUtils;
 
-import com.atomikos.icatch.config.UserTransactionService;
-import com.atomikos.icatch.config.UserTransactionServiceImp;
-import com.atomikos.icatch.jta.UserTransactionManager;
-
 @Configuration
 @Profile("jta")
-// @EnableConfigurationProperties
-// @EnableAutoConfiguration
 @EnableJpaRepositories(basePackages = {"org.nh.rest.persistence.relational.ds01",
         "org.nh.rest.persistence.relational.ds02"})
-// @Import({JtaAutoConfiguration.class})
-public class JTADatasources {
+public class TransactionManagerConfigJTA {
 
     @Bean
     @ConfigurationProperties(prefix = "spring.jta.atomikos.datasource.ds01")
@@ -57,7 +54,6 @@ public class JTADatasources {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
 
         factoryBean.setJtaDataSource(ds01());
-        // factoryBean.setDataSource(ds01());
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter);
         factoryBean.setPackagesToScan("org.nh.rest.model.ds01");
 
@@ -84,21 +80,11 @@ public class JTADatasources {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
 
         factoryBean.setJtaDataSource(ds02());
-        // factoryBean.setDataSource(ds02());
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter);
         factoryBean.setPackagesToScan("org.nh.rest.model.ds02");
 
         return factoryBean;
     }
-
-    // @Bean(initMethod = "init", destroyMethod = "close")
-    // public UserTransactionManager atomikosTransactionManager() throws
-    // SystemException {
-    // UserTransactionManager userTransactionManager = new
-    // UserTransactionManager();
-    // userTransactionManager.setTransactionTimeout(600);
-    // return userTransactionManager;
-    // }
 
     @Bean(initMethod = "init", destroyMethod = "close")
     @ConditionalOnMissingBean
@@ -110,21 +96,15 @@ public class JTADatasources {
         return manager;
     }
 
-    // @Bean
-    // public JtaTransactionManager transactionManager(UserTransactionManager
-    // atomikosTransactionManager) {
-    // JtaTransactionManager transactionManager = new JtaTransactionManager();
-    // transactionManager.setTransactionManager(atomikosTransactionManager);
-    // transactionManager.setUserTransaction(atomikosTransactionManager);
-    // return transactionManager;
-    // }
+    @Bean
+    PlatformTransactionManager distributedTransactionManager(JtaTransactionManager tm) {
+        return tm;
+    }
 
     @Bean
     public JtaTransactionManager transactionManager(UserTransaction userTransaction,
             TransactionManager transactionManager) {
         return new JtaTransactionManager(userTransaction, transactionManager);
-        // return new
-        // JpaTransactionManager(ds01EntityManagerFactory().getObject());
     }
 
     @Autowired

@@ -14,11 +14,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "org.nh.rest.persistence.relational.ds02", /*
-                                                                                  * entityManagerFactoryRef
-                                                                                  * =
-                                                                                  * "ds02EntityManager",
-                                                                                  */transactionManagerRef = "ds02TransactionManager")
+@EnableJpaRepositories(basePackages = "org.nh.rest.persistence.relational.ds02", transactionManagerRef = "ds02TransactionManager")
 @Profile("nonjta")
 public class DS02Config {
 

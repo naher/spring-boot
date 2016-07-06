@@ -1,14 +1,16 @@
 package org.nh.rest.service;
 
+import java.util.List;
+
 import org.nh.rest.model.ds01.User;
 import org.nh.rest.persistence.relational.ds01.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-// @Transactional(transactionManager = "ds02TransactionManager")
-@Transactional("chainedTransactionManager")
+@Transactional(transactionManager = "ds02TransactionManager")
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -33,6 +35,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByEmail(String userEmail) {
         return repository.findByEmail(userEmail);
+    }
+
+    @Override
+    public List<User> findAll(List<Long> ids) {
+        return repository.findAll(ids);
     }
 
 }

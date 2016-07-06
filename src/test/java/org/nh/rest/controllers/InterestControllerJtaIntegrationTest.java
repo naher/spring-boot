@@ -4,16 +4,16 @@ import org.apache.log4j.Logger;
 
 import org.junit.Test;
 
-import org.nh.rest.IntegrationTest;
+import org.nh.rest.JtaIntegrationTest;
 import org.nh.rest.service.InterestService;
 import org.nh.rest.service.ProductService;
 import org.nh.rest.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class InterestControllerIntegrationTest extends IntegrationTest {
+public class InterestControllerJtaIntegrationTest extends JtaIntegrationTest {
 
-    protected final Logger logger = Logger.getLogger(InterestControllerIntegrationTest.class);
+    protected final Logger logger = Logger.getLogger(InterestControllerJtaIntegrationTest.class);
 
     @Autowired
     private InterestService interestService;

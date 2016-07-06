@@ -1,7 +1,9 @@
 package org.nh.rest.controllers;
 
 import org.apache.log4j.Logger;
+
 import org.nh.rest.exception.NotFoundException;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
