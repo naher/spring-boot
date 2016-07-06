@@ -1,5 +1,7 @@
 package org.nh.rest.service;
 
+import java.util.List;
+
 import org.nh.rest.model.ds01.User;
 import org.nh.rest.persistence.relational.ds01.UserRepository;
 
@@ -21,8 +23,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User save(User user) {
+        return repository.save(user);
+    }
+
+    @Override
     public User get(String name) {
         return repository.findByName(name);
+    }
+
+    @Override
+    public User getByEmail(String userEmail) {
+        return repository.findByEmail(userEmail);
+    }
+
+    @Override
+    public List<User> findAll(List<Long> ids) {
+        return repository.findAll(ids);
     }
 
 }

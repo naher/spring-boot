@@ -10,7 +10,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         "org.nh.rest.security"})
 @EnableJpaRepositories({"org.nh.rest.persistence.relational.ds"})
 @EnableElasticsearchRepositories({"org.nh.rest.persistence.elasticsearch"})
-@Import({AppConfiguration.class, DS01Config.class, DS02Config.class})
+@Import({AppConfiguration.class, DS01Config.class, DS02Config.class, TransactionManagerConfigChained.class,
+        TransactionManagerConfigJTA.class})
 public class Application {
 
     public static final String X_AUTH_EMAIL = "X-Auth-Email";

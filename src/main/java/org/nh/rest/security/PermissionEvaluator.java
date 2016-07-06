@@ -3,7 +3,9 @@ package org.nh.rest.security;
 import java.io.Serializable;
 
 import org.apache.log4j.Logger;
+
 import org.nh.rest.model.City;
+
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;

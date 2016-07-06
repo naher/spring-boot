@@ -28,7 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 // Enable JMX so we can test the MBeans (you can't do this in a properties file)
 @TestPropertySource(properties = {"spring.jmx.enabled:true", "spring.datasource.jmx-enabled:true"})
 // Separate profile for web tests to avoid clashing databases
-@ActiveProfiles("scratch")
+@ActiveProfiles({"scratch", "nonjta"})
 public abstract class MockMvcIntegrationTest {
 
     protected final Logger logger = Logger.getLogger(MockMvcIntegrationTest.class);

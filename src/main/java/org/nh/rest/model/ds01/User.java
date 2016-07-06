@@ -7,6 +7,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String name;
 
     @Column(unique = true, nullable = false)
@@ -30,7 +31,7 @@ public class User {
     @Column
     private int age;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "products_of_interest", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "customer_id")
     List<Long> productsOfInterest = new ArrayList<Long>();

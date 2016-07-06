@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import org.nh.rest.exception.NotFoundException;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -32,6 +33,13 @@ public abstract class AbstractController {
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public @ResponseBody String runtimeExceptionHandler(RuntimeException e) {
         logger.error("INTERNAL_SERVER_ERROR", e);
+        return e.getMessage();
+    }
+
+    @ExceptionHandler({DataIntegrityViolationException.class})
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    public @ResponseBody String dataIntegrityViolationExceptionHandler(DataIntegrityViolationException e) {
+        logger.error("CONFLICT", e);
         return e.getMessage();
     }
 }
