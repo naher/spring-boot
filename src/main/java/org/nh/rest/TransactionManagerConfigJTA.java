@@ -7,10 +7,6 @@ import javax.sql.DataSource;
 import javax.transaction.TransactionManager;
 import javax.transaction.UserTransaction;
 
-import com.atomikos.icatch.config.UserTransactionService;
-import com.atomikos.icatch.config.UserTransactionServiceImp;
-import com.atomikos.icatch.jta.UserTransactionManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationHome;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -28,11 +24,68 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.jta.JtaTransactionManager;
 import org.springframework.util.StringUtils;
 
+import com.atomikos.icatch.config.UserTransactionService;
+import com.atomikos.icatch.config.UserTransactionServiceImp;
+import com.atomikos.icatch.jta.UserTransactionManager;
+
 @Configuration
 @Profile("jta")
 @EnableJpaRepositories(basePackages = {"org.nh.rest.persistence.relational.ds01",
         "org.nh.rest.persistence.relational.ds02"})
 public class TransactionManagerConfigJTA {
+
+    @Autowired
+    private JtaProperties jtaProperties;
+
+    @Bean
+    PlatformTransactionManager distributedTransactionManager(JtaTransactionManager tm) {
+        return tm;
+    }
+
+    @Bean(initMethod = "init", destroyMethod = "close")
+    @ConditionalOnMissingBean
+    public UserTransactionManager atomikosTransactionManager(UserTransactionService userTransactionService)
+            throws Exception {
+        UserTransactionManager manager = new UserTransactionManager();
+        manager.setStartupTransactionService(false);
+        manager.setForceShutdown(true);
+        return manager;
+    }
+
+    @Bean
+    public JtaTransactionManager transactionManager(UserTransaction userTransaction,
+            TransactionManager transactionManager) {
+        return new JtaTransactionManager(userTransaction, transactionManager);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    @ConfigurationProperties(prefix = JtaProperties.PREFIX)
+    public AtomikosProperties atomikosProperties() {
+        return new AtomikosProperties();
+    }
+
+    @Bean(initMethod = "init", destroyMethod = "shutdownForce")
+    @ConditionalOnMissingBean(UserTransactionService.class)
+    public UserTransactionServiceImp userTransactionService(AtomikosProperties atomikosProperties) {
+        Properties properties = new Properties();
+        if (StringUtils.hasText(this.jtaProperties.getTransactionManagerId())) {
+            properties.setProperty("com.atomikos.icatch.tm_unique_name", this.jtaProperties.getTransactionManagerId());
+        }
+        properties.setProperty("com.atomikos.icatch.log_base_dir", getLogBaseDir());
+        properties.putAll(atomikosProperties.asProperties());
+        return new UserTransactionServiceImp(properties);
+    }
+
+    private String getLogBaseDir() {
+        if (StringUtils.hasLength(this.jtaProperties.getLogDir())) {
+            return this.jtaProperties.getLogDir();
+        }
+        File home = new ApplicationHome().getDir();
+        return new File(home, "transaction-logs").getAbsolutePath();
+    }
+
+    // datasource 1
 
     @Bean
     @ConfigurationProperties(prefix = "spring.jta.atomikos.datasource.ds01")
@@ -60,6 +113,8 @@ public class TransactionManagerConfigJTA {
         return factoryBean;
     }
 
+    // datasource 2
+
     @Bean
     @ConfigurationProperties(prefix = "spring.jta.atomikos.datasource.ds02")
     public DataSource ds02() {
@@ -84,57 +139,6 @@ public class TransactionManagerConfigJTA {
         factoryBean.setPackagesToScan("org.nh.rest.model.ds02");
 
         return factoryBean;
-    }
-
-    @Bean(initMethod = "init", destroyMethod = "close")
-    @ConditionalOnMissingBean
-    public UserTransactionManager atomikosTransactionManager(UserTransactionService userTransactionService)
-            throws Exception {
-        UserTransactionManager manager = new UserTransactionManager();
-        manager.setStartupTransactionService(false);
-        manager.setForceShutdown(true);
-        return manager;
-    }
-
-    @Bean
-    PlatformTransactionManager distributedTransactionManager(JtaTransactionManager tm) {
-        return tm;
-    }
-
-    @Bean
-    public JtaTransactionManager transactionManager(UserTransaction userTransaction,
-            TransactionManager transactionManager) {
-        return new JtaTransactionManager(userTransaction, transactionManager);
-    }
-
-    @Autowired
-    private JtaProperties jtaProperties;
-
-    @Bean
-    @ConditionalOnMissingBean
-    @ConfigurationProperties(prefix = JtaProperties.PREFIX)
-    public AtomikosProperties atomikosProperties() {
-        return new AtomikosProperties();
-    }
-
-    @Bean(initMethod = "init", destroyMethod = "shutdownForce")
-    @ConditionalOnMissingBean(UserTransactionService.class)
-    public UserTransactionServiceImp userTransactionService(AtomikosProperties atomikosProperties) {
-        Properties properties = new Properties();
-        if (StringUtils.hasText(this.jtaProperties.getTransactionManagerId())) {
-            properties.setProperty("com.atomikos.icatch.tm_unique_name", this.jtaProperties.getTransactionManagerId());
-        }
-        properties.setProperty("com.atomikos.icatch.log_base_dir", getLogBaseDir());
-        properties.putAll(atomikosProperties.asProperties());
-        return new UserTransactionServiceImp(properties);
-    }
-
-    private String getLogBaseDir() {
-        if (StringUtils.hasLength(this.jtaProperties.getLogDir())) {
-            return this.jtaProperties.getLogDir();
-        }
-        File home = new ApplicationHome().getDir();
-        return new File(home, "transaction-logs").getAbsolutePath();
     }
 
 }
