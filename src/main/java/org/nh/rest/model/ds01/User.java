@@ -1,5 +1,6 @@
 package org.nh.rest.model.ds01;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +15,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
+//import org.springframework.data.annotation.Id;
+import org.springframework.data.gemfire.mapping.Region;
+
 @Entity
 @Table
-public class User {
+@Region("Users")
+public class User implements Serializable {
 
     @Id
+    @org.springframework.data.annotation.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -32,7 +38,7 @@ public class User {
     private int age;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "products_of_interest", joinColumns = @JoinColumn(name = "product_id"))
+    @CollectionTable(name = "products_of_interest", joinColumns = @JoinColumn(name = "product_id") )
     @Column(name = "customer_id")
     List<Long> productsOfInterest = new ArrayList<Long>();
 
