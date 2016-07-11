@@ -3,14 +3,12 @@ package org.nh.rest.controllers;
 import java.util.List;
 
 import org.junit.Assert;
-
 import org.nh.rest.IntegrationAbstractTest;
 import org.nh.rest.model.ds01.User;
 import org.nh.rest.model.ds02.Product;
 import org.nh.rest.service.InterestService;
 import org.nh.rest.service.ProductService;
 import org.nh.rest.service.UserService;
-
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -48,9 +46,8 @@ public class InterestControllerAbstractIntegrationTest extends ControllerAbstrac
         String pname04 = "theProductName04_InterestControllerIntegrationTest";
 
         HttpHeaders headers = getHeaders();
-        ResponseEntity<Void> entity = new TestRestTemplate().exchange(
-                getURL("/interest/e/" + uemail + "/p/" + pname01), HttpMethod.POST, new HttpEntity<Void>(headers),
-                Void.class);
+        ResponseEntity<Void> entity = new TestRestTemplate().exchange(getURL("/interest/e/" + uemail + "/p/" + pname01),
+                HttpMethod.POST, new HttpEntity<Void>(headers), Void.class);
         Assert.assertEquals(HttpStatus.OK, entity.getStatusCode());
 
         entity = new TestRestTemplate().exchange(getURL("/interest/e/" + uemail + "/p/" + pname02), HttpMethod.POST,
@@ -71,6 +68,9 @@ public class InterestControllerAbstractIntegrationTest extends ControllerAbstrac
         Assert.assertNotNull(psaved02);
         Product psaved03 = productService.get(pname03);
         Assert.assertNotNull(psaved03);
+
+        // product 4 is not present in the database, which means the transaction
+        // was roll backed properly
         Product psaved04 = productService.get(pname04);
         Assert.assertNull(psaved04);
         User usaved = userService.getByEmail(uemail);

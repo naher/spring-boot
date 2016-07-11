@@ -11,9 +11,9 @@ import org.nh.rest.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class InterestControllerIntegrationTest extends IntegrationTest {
+public class InterestControllerNonJtaIntegrationTest extends IntegrationTest {
 
-    protected final Logger logger = Logger.getLogger(InterestControllerIntegrationTest.class);
+    protected final Logger logger = Logger.getLogger(InterestControllerNonJtaIntegrationTest.class);
 
     @Autowired
     private InterestService interestService;

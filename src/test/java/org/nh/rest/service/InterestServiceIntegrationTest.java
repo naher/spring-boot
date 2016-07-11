@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import org.nh.rest.IntegrationTest;
 import org.nh.rest.model.ds01.User;
 import org.nh.rest.model.ds02.Product;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.annotation.DirtiesContext;
@@ -194,6 +192,9 @@ public class InterestServiceIntegrationTest extends IntegrationTest {
         Assert.assertNotNull(psaved02);
         Product psaved03 = productService.get(pname03);
         Assert.assertNotNull(psaved03);
+
+        // product 4 is not present in the database, which means the transaction
+        // was roll backed properly
         Product psaved04 = productService.get(pname04);
         Assert.assertNull(psaved04);
         User usaved = userService.getByEmail(uemail);
