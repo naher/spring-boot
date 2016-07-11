@@ -11,4 +11,6 @@ public interface UserCacheService {
     User get(Long id);
 
     void remove(Long id);
+
+    User getByName(String name);
 }

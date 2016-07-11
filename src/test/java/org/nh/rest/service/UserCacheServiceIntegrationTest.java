@@ -32,4 +32,22 @@ public class UserCacheServiceIntegrationTest extends IntegrationTest {
 
         Assert.assertEquals(saved.getId(), retrieved.getId());
     }
+
+    @Test
+    public void getByName() {
+        String email = "the@email.com";
+        String name = "thename01";
+
+        User saved = service.create(name, email);
+
+        Assert.assertEquals(name, saved.getName());
+
+        cache.store(saved);
+
+        User retrieved = cache.getByName(saved.getName());
+
+        Assert.assertEquals(name, retrieved.getName());
+
+        Assert.assertEquals(saved.getId(), retrieved.getId());
+    }
 }

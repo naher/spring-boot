@@ -33,4 +33,9 @@ public class UserCacheServiceImpl implements UserCacheService {
         repository.delete(id);
     }
 
+    @Override
+    public User getByName(String name) {
+        return repository.findByName(name);
+    }
+
 }
